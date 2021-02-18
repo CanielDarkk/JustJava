@@ -21,12 +21,12 @@ public class MainActivity extends AppCompatActivity {
     int quantity = 0;
 
     public void increment(View view) {
-        quantity = quantity + 1 ;
+        int quantity = 3;
         display(quantity);
     }
 
     public void decrement(View view) {
-        quantity = quantity - 1;
+        int quantity = 1;
         display(quantity);
     }
 
