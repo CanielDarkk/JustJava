@@ -17,11 +17,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-
     int quantity = 0;
 
     public void increment(View view) {
-        int quantity = 3;
+        int quantity = 2;
+        quantity = 3
+        quantity = 4
+        quantity = 5
         display(quantity);
     }
 
