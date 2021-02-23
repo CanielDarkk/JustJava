@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void decrement(View view) {
         int quantity = 1;
+        quantity--;
         display(quantity);
     }
 
