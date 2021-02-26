@@ -20,21 +20,19 @@ public class MainActivity extends AppCompatActivity {
     int quantity = 0;
 
     public void increment(View view) {
-        int quantity = 2;
-        //quantity = quantity + 1;      ***This is one way to do it***
-        quantity++;   //This is a simpler way to do it
+        quantity++;
         display(quantity);
     }
 
     public void decrement(View view) {
-        int quantity = 1;
-        quantity--;
-        display(quantity);
+        if (quantity>0) {
+            quantity--;
+            display(quantity);
+        }
     }
-
     public void submitOrder(View view) {
-        int numberOfCoffees = quantity;
-        display(quantity );
+        int numberOfCoffees = 6;
+        display(numberOfCoffees );
         displayPrice(numberOfCoffees*5);
     }
 
