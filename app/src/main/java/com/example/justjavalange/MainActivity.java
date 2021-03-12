@@ -40,15 +40,21 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void submitOrder(View view) {
-        int numberOfCoffees = quantity;
-        display(numberOfCoffees);
-        displayPrice(numberOfCoffees * 5);
+        String priceMessage = "Free";
+        displayMessage(priceMessage);
     }
+    /**
+     * This method displays the given text on the screen.
+     */
 
+    private void displayMessage(String message) {
+        TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
+        priceTextView.setText(message);
+    }
 
     private void display(int number) {
         TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
-        quantityTextView.setText("" + number);
+        quantityTextView.setText(" " + number);
 
     }
     private void displayPrice ( int number){
