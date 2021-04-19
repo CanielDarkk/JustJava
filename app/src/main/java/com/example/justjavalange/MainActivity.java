@@ -40,9 +40,10 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void submitOrder(View view) {
+        // int coffeesOrdered = quantity;
         int price = quantity * 5;
-        String priceMessage = "Total $" + price;
-        priceMessage = priceMessage + "\nThank you!";
+        String priceMessage = "Thank you for ordering " + quantity + " Coffees! \nAmount Due: $" + price; //I used an escape sequence \" to include the quotes around free
+        priceMessage = priceMessage + "\n\nYour order will be right up!"; //Double \n escape key for w line separation
         displayMessage(priceMessage);
     }
     /**
