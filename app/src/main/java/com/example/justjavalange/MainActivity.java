@@ -17,7 +17,7 @@ import android.widget.TextView;
  */
 public class MainActivity extends AppCompatActivity {
 
-    /**
+    /*
      * Setting Global Quantity
      */
 
@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void increment(View view) {
         quantity++;
-        display(quantity);
+        displayQuantity(quantity);
     }
 
     /**
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     public void decrement(View view){
         if(quantity>0) {
             quantity--;
-            display(quantity);
+            displayQuantity(quantity);
         }
     }
 
@@ -56,13 +56,22 @@ public class MainActivity extends AppCompatActivity {
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
-        // display(quantity);
-        // displayPrice(coffeesOrdered * 5);
-        // int coffeesOrdered = quantity;
-        int price = quantity * 5;
+        int price = calculatePrice();
         String priceMessage = "Thank you for ordering " + quantity + " Coffees! \nAmount Due: $" + price; //I used an escape sequence \" to include the quotes around free
         priceMessage = priceMessage + "\n\nYour order will be right up!"; //Double \n escape key for w line separation
         displayMessage(priceMessage);
+
+        calculatePrice();
+    }
+
+
+    /**
+     * Calculates the price of the order.
+     * @return total price
+     */
+    private int calculatePrice() {
+        int price = quantity * 5;
+        return price;
     }
 
 
@@ -70,9 +79,9 @@ public class MainActivity extends AppCompatActivity {
     /**
      * This method displays the given quantity value on the screen.
      */
-    private void display(int number) {
+    private void displayQuantity(int numberOfCoffees) {
         TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
-        quantityTextView.setText("" + number);
+        quantityTextView.setText("" + numberOfCoffees);
     }
 
     /**
@@ -91,5 +100,6 @@ public class MainActivity extends AppCompatActivity {
         priceTextView.setText(message);
 
     }
+
 
 }
