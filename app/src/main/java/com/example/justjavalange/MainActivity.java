@@ -6,7 +6,9 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import java.text.NumberFormat;
@@ -40,6 +42,11 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void submitOrder(View view) {
+        CheckBox whippedCreamCheckBox = (CheckBox) findViewById(R.id.whipped_cream_checkbox);
+        boolean hasWhippedCream = whippedCreamCheckBox.isChecked();
+        Log.v("MainActivity", "Has whipped cream: " + hasWhippedCream);
+
+
         int price = quantity * 5;
         String priceMessage = "Total $" + price;
         priceMessage = priceMessage + "\nThank you!";

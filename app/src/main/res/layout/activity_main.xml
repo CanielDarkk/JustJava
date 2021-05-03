@@ -17,6 +17,7 @@
 
 
     <TextView
+        android:id="@+id/whipped_cream_checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -38,9 +39,7 @@
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:paddingLeft="24dp"
-        android:text="Whipped Cream"
-        android:onClick="onCheckboxClick" />
-
+        android:text="Whipped Cream" />
 
 
 
