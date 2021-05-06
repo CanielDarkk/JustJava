@@ -45,16 +45,32 @@ public class MainActivity extends AppCompatActivity {
         CheckBox whippedCreamCheckBox = (CheckBox)findViewById(R.id.whipped_cream_checkbox);
         boolean hasWhippedCream = whippedCreamCheckBox.isChecked();
         Log.v("MainActivity", "Has whipped cream:" + hasWhippedCream);
-
-
-        int price = quantity * 5;
-        String priceMessage = "Total $" + price;
-        priceMessage = priceMessage + "\nThank you!";
+        int price = calculatePrice();
+        String priceMessage = createOrderSummary(price, hasWhippedCream);
         displayMessage(priceMessage);
+
+
+
     }
     /**
      * This method displays the given text on the screen.
      */
+    private int calculatePrice() {
+        int price = quantity * 5;
+        return price;
+    }
+
+    /**
+     * Createa summary of our order
+     *
+     * @param price
+     * @return priceMessage
+     */
+    private String createOrderSummary(int price, boolean hasWhippedcream) {
+        String priceMessage = "Thank you for ordering " + quantity + " Coffees! \nAmount Due: $" + price;
+        priceMessage = priceMessage + "\n\nYour order will be right up!";
+        return priceMessage;
+    }
 
     private void displayMessage(String message) {
         TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
@@ -64,11 +80,4 @@ public class MainActivity extends AppCompatActivity {
     private void displayQuantity(int number) {
         TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
         quantityTextView.setText(" " + number);
-
-    }
-    private void displayPrice ( int number){
-        TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
-        priceTextView.setText(NumberFormat.getCurrencyInstance().format(number));
-    }
-
-}
+    }}
