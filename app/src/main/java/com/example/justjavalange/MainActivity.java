@@ -61,14 +61,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Createa summary of our order
+     *
+     * @param price of the order
+     * @param addWhippedCream is whether or not the user wants whipped cream topping
+     * @return priceMessage
+     */
+
+    /**
+     * Create a summary of our order
      *
      * @param price
      * @return priceMessage
      */
-    private String createOrderSummary(int price, boolean hasWhippedcream) {
+    private String createOrderSummary(int price, boolean addWhippedcream) {
         String priceMessage = "Thank you for ordering " + quantity + " Coffees! \nAmount Due: $" + price;
-        priceMessage = priceMessage + "\n\nYour order will be right up!";
+        priceMessage += "Add Whipped Cream? " + addWhippedCream;
+        priceMessage += "\n\nYour order will be right up!";
         return priceMessage;
     }
 
