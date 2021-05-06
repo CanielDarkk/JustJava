@@ -42,9 +42,9 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void submitOrder(View view) {
-        CheckBox whippedCreamCheckBox = (CheckBox) findViewById(R.id.whipped_cream_checkbox);
+        CheckBox whippedCreamCheckBox = (CheckBox)findViewById(R.id.whipped_cream_checkbox);
         boolean hasWhippedCream = whippedCreamCheckBox.isChecked();
-        Log.v("MainActivity", "Has whipped cream: " + hasWhippedCream);
+        Log.v("MainActivity", "Has whipped cream:" + hasWhippedCream);
 
 
         int price = quantity * 5;
