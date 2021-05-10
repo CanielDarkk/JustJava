@@ -73,9 +73,9 @@ public class MainActivity extends AppCompatActivity {
      * @param price
      * @return priceMessage
      */
-    private String createOrderSummary(int price, boolean addWhippedcream) {
+    private String createOrderSummary(int price, boolean addWhippedCream) {
         String priceMessage = "Thank you for ordering " + quantity + " Coffees! \nAmount Due: $" + price;
-        priceMessage += "Add Whipped Cream? " + addWhippedCream;
+        priceMessage += "\nAdd Whipped Cream? " + addWhippedCream;
         priceMessage += "\n\nYour order will be right up!";
         return priceMessage;
     }
