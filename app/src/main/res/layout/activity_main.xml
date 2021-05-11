@@ -15,7 +15,7 @@
 
 
     <EditText
-        android:id="@+id/user_unput_name_view"
+        android:id="@+id/name_field"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Name"

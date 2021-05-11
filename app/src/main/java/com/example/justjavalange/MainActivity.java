@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.text.NumberFormat;
@@ -43,9 +44,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void submitOrder(View view) {
         // Figure out if user wants Whipped Cream
-        CheckBox whippedCreamCheckBox = (CheckBox)findViewById(R.id.whipped_cream_checkbox);
-        boolean hasWhippedCream = whippedCreamCheckBox.isChecked();
-        Log.v("MainActivity", "Has whipped cream:" + hasWhippedCream);
+        EditText nameField = (EditText) findViewById(R.id.name_field)
+        String value = nameField.getText().toString();
+        Log.v(tag: "MainActivity", msg: "Name: " + value);
 
         // Figure out if user wants chocolate topping
         CheckBox chocolateCheckBox = (CheckBox) findViewById(R.id.chocolate_checkbox);
@@ -55,8 +56,9 @@ public class MainActivity extends AppCompatActivity {
         int price = calculatePrice();
 
         // Display the order summary on the screen
-        String priceMessage = createOrderSummary(price, hasWhippedCream, hasChocolate);
-        displayMessage(priceMessage);
+        CheckBox whippedCreamCheckBox= (CheckBox) findViewById(R.id.whipped_cream_checkbox);
+        boolean hasWhippedCream = whippedCreamCheckBox.isChecked();
+        Log.v(tag: "MainActivity", msg: "Has whipped cream: " + hasWhippedCream)
 
     }
     /**
