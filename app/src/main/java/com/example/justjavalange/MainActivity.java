@@ -11,6 +11,8 @@ package com.example.justjavalange;
 
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -83,8 +85,8 @@ public class MainActivity extends AppCompatActivity {
         String priceMessage =  createOrderSummary(price, hasWhippedCream, hasChocolate, name);
 
         Intent intent = new Intent(Intent.ACTION_SENDTO);
-        intent.setData(Uri.parse*"mailto"));
-        intent.putExtra(Intent.EXTRA_SUBJECT, value:"Just Java order for " + name);
+        intent.setData(Uri.parse("mailto: "));
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Just Java order for " + name);
         intent.putExtra(Intent.EXTRA_TEXT, priceMessage);
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
