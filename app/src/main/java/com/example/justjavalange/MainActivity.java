@@ -1,9 +1,16 @@
+/**
+ * IMPORTANT: Make sure you are using the correct package name.
+ * This example uses the package name:
+ * package com.example.android.justjava
+ * If you get an error when copying this code into Android studio, update it to match the package name found
+ * in the project's AndroidManifest.xml file.
+ **/
 
 package com.example.justjavalange;
 
 
 
-import android.content.Intent;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -24,11 +31,13 @@ public class MainActivity extends AppCompatActivity {
      */
     int quantity = 0;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
+
 
     /**
      * This method is called when the Increment/Plus button is clicked.
@@ -52,29 +61,26 @@ public class MainActivity extends AppCompatActivity {
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
-        //Get text from the EditText XML
+        // Figure out if user wants whipped cream
+        CheckBox whippedCreamCheckBox = (CheckBox) findViewById(R.id.whipped_cream_checkbox);
+        boolean hasWhippedCream = whippedCreamCheckBox.isChecked();
+        Log.v("MainActivity","Has whipped cream: " + hasWhippedCream);
+
+
+        // Figure out if user wants chocolate
+        CheckBox chocolate = (CheckBox) findViewById(R.id.chocolate);
+        boolean hasChocolate = chocolate.isChecked();
+        Log.v("MainActivity","Has chocolate: " + hasChocolate);
+
+
+        // Get text from EditText to Html
         EditText nameField = (EditText) findViewById(R.id.user_input_name_view);
         String name = nameField.getText().toString();
-        Log.v("MainActivity", "Name:"+ name);
+        Log.v("MainActivity","Name: "+ name);
 
 
-        //Figure out if user wants whipped cream
-        CheckBox whippedCreamCheckBox = (CheckBox)findViewById(R.id.whipped_cream_checkbox);
-        boolean hasWhippedCream = whippedCreamCheckBox.isChecked();
-        Log.v("MainActivity", "Has whipped cream:" + hasWhippedCream);
-
-        //Figure out if user wants chocolate topping
-        CheckBox chocolateCheckBox = (CheckBox)findViewById(R.id.chocolate);
-        boolean hasChocolate = chocolateCheckBox.isChecked();
-        Log.v("MainActivity", "Add Chocolate Topping: " + hasChocolate);
-
-
-
-        int price = calculatePrice(hasWhippedCream, hasChocolate);
-        String priceMessage = createOrderSummary(price, hasWhippedCream. hasChocolate, name);
-        displayMessage(priceMessage);
-
-        //Display the order summary on the string
+        int price = calculatePrice(hasWhippedCream,hasChocolate);
+        String priceMessage =  createOrderSummary(price, hasWhippedCream, hasChocolate, name);
 
         Intent intent = new Intent(Intent.ACTION_SENDTO);
         intent.setData(Uri.parse*"mailto"));
@@ -83,20 +89,60 @@ public class MainActivity extends AppCompatActivity {
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         }
+
+
         displayMessage(priceMessage);
     }
 
 
+    /**
+     * Calculates the price of the order
+     *
+     * @param hasWhippedCream is whether or not the user wants whipped cream
+     * @param hasChocolate is whether or not the user wants chocolate
+     * @return total price
+     */
 
-    int calculatePrice(boolean addWhippedCream, boolean addChocolate){
-        int baseprice = 5;
-        if (addWhippedCream) {
-            baseprice = baseprice + 1;
+    private int calculatePrice(boolean hasWhippedCream, boolean hasChocolate){
+        int basePrice = 5;
+
+        //adds 1$ if they want whipped cream
+        if (hasWhippedCream) {
+            basePrice = basePrice + 1;
         }
+        //adds 2$ if they want chocolate
+        if (hasChocolate){
+            basePrice = basePrice +2;
+        } else {
+            // do nothing
+        }
+        //calculate the total order price by multiplying the quantity
+        return quantity * basePrice;
+    }
 
-        return quantity * baseprice;
+
+
+    /**
+     * Create a summary of our order
+     * @param name     of the customer
+     * @param price    the total price
+     * @param addWhippedCream is whether or not the user wants Whipped Cream Topping
+     * @param chocolate
+     * @return
+     */
+
+    private String createOrderSummary(int price, boolean addWhippedCream, boolean chocolate, String name) {
+        String priceMessage = "Name: "+ name;
+        priceMessage += "\nThank you for ordering " + quantity + " Coffees!";
+        priceMessage += "\nAdd Whipped Cream? " + addWhippedCream;
+        priceMessage += "\nAdd Chocolate? " + chocolate;//I used the escape key \n to put info on a new line
+        priceMessage += "\nAmount Due: $" + price; //I used the escape key \n to put info on a new line
+        priceMessage += "\n\nYour order will be right up!"; //Double \n escape key for w line separation
+        return priceMessage;
 
     }
+
+
     /**
      * This method displays the given quantity value on the screen.
      */
@@ -119,37 +165,7 @@ public class MainActivity extends AppCompatActivity {
     private void displayMessage(String message) {
         TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
         priceTextView.setText(message);
-    }
-
-
-
-    /***
-     * Create a summary of our order
-     * @param price
-     * @return priceMessage
-     * @param hasWhippedCream is whether or not the user wants Whipped Cream Topping
-     * @param name of the customer
-     */
-
-
-    private String createOrderSummary(int price, boolean hasWhippedCream, boolean addChocolate, String name) {
-        String priceMessage ="\nName: "+ name;
-        priceMessage += "\nThank you for ordering " + quantity + " Coffees!";  //I used the escape key \n to put info on a new line
-        priceMessage += "\nAdd Whipped Cream? " + hasWhippedCream;
-        priceMessage += "\nAdd Chocolate Topping" + addChocolate;
-        priceMessage += "\nAmount Due: $" + price;
-        priceMessage += "\n\nYour order will be right up!"; //Double \n escape key for w line separation
-        return priceMessage;
-
 
     }
-
-
-
-
-
-
-
-
 
 }
