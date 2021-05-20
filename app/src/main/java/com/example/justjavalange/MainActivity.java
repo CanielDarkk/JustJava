@@ -3,6 +3,7 @@ package com.example.justjavalange;
 
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -69,23 +70,31 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        int price = calculatePrice();
-        String priceMessage = createOrderSummary(price,hasWhippedCream, hasChocolate, name);
+        int price = calculatePrice(hasWhippedCream, hasChocolate);
+        String priceMessage = createOrderSummary(price, hasWhippedCream. hasChocolate, name);
         displayMessage(priceMessage);
-
-
 
         //Display the order summary on the string
 
-
-
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse*"mailto"));
+        intent.putExtra(Intent.EXTRA_SUBJECT, value:"Just Java order for " + name);
+        intent.putExtra(Intent.EXTRA_TEXT, priceMessage);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+        displayMessage(priceMessage);
     }
 
 
 
-    int calculatePrice(){
-        int price = quantity * 5;
-        return price;
+    int calculatePrice(boolean addWhippedCream, boolean addChocolate){
+        int baseprice = 5;
+        if (addWhippedCream) {
+            baseprice = baseprice + 1;
+        }
+
+        return quantity * baseprice;
 
     }
     /**
