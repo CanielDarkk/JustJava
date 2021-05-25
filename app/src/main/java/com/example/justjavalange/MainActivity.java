@@ -13,6 +13,7 @@ package com.example.justjavalange;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
+
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -38,6 +39,22 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        TextView coffeeAccessories = (TextView) findViewById(R.id.CoffeeAccessories_Button);
+        // This is to go to another page via a Text View, if i want to make another page I can Copy and paste with updated information
+
+        coffeeAccessories.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent RegionCoffeeIntent = new Intent(MainActivity.this, coffeeAccessoriesPage.class);
+                startActivity(RegionCoffeeIntent);
+            }
+        });
+
+
+
+
+
     }
 
 
@@ -64,19 +81,19 @@ public class MainActivity extends AppCompatActivity {
      */
     public void submitOrder(View view) {
         // Figure out if user wants whipped cream
-        CheckBox whippedCreamCheckBox = (CheckBox) findViewById(R.id.whipped_cream_checkbox);
+        CheckBox whippedCreamCheckBox = findViewById(R.id.whipped_cream_checkbox);
         boolean hasWhippedCream = whippedCreamCheckBox.isChecked();
         Log.v("MainActivity","Has whipped cream: " + hasWhippedCream);
 
 
         // Figure out if user wants chocolate
-        CheckBox chocolate = (CheckBox) findViewById(R.id.chocolate);
+        CheckBox chocolate = findViewById(R.id.chocolate);
         boolean hasChocolate = chocolate.isChecked();
         Log.v("MainActivity","Has chocolate: " + hasChocolate);
 
 
         // Get text from EditText to Html
-        EditText nameField = (EditText) findViewById(R.id.user_input_name_view);
+        EditText nameField = findViewById(R.id.user_input_name_view);
         String name = nameField.getText().toString();
         Log.v("MainActivity","Name: "+ name);
 
@@ -85,16 +102,19 @@ public class MainActivity extends AppCompatActivity {
         String priceMessage =  createOrderSummary(price, hasWhippedCream, hasChocolate, name);
 
         Intent intent = new Intent(Intent.ACTION_SENDTO);
-        intent.setData(Uri.parse("mailto: "));
-        intent.putExtra(Intent.EXTRA_SUBJECT, "Just Java order for " + name);
-        intent.putExtra(Intent.EXTRA_TEXT, priceMessage);
+        intent.setData(Uri.parse("mailto: \"calenzinger@icloud.com\"?subject="+ Uri.encode("Just Java order for "+ name) + "&body=" + Uri.encode(priceMessage))); // only email apps should handle this
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
+
         }
 
-
         displayMessage(priceMessage);
+
     }
+
+
+
+
 
 
     /**
@@ -115,8 +135,6 @@ public class MainActivity extends AppCompatActivity {
         //adds 2$ if they want chocolate
         if (hasChocolate){
             basePrice = basePrice +2;
-        } else {
-            // do nothing
         }
         //calculate the total order price by multiplying the quantity
         return quantity * basePrice;
@@ -129,8 +147,8 @@ public class MainActivity extends AppCompatActivity {
      * @param name     of the customer
      * @param price    the total price
      * @param addWhippedCream is whether or not the user wants Whipped Cream Topping
-     * @param chocolate
-     * @return
+     * @param chocolate chocolate
+     * @return returns
      */
 
     private String createOrderSummary(int price, boolean addWhippedCream, boolean chocolate, String name) {
@@ -148,8 +166,9 @@ public class MainActivity extends AppCompatActivity {
     /**
      * This method displays the given quantity value on the screen.
      */
+    @SuppressLint("SetTextI18n")
     private void display(int number) {
-        TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
+        TextView quantityTextView = findViewById(R.id.quantity_text_view);
         quantityTextView.setText("" + number);
     }
 
@@ -157,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
      * This method displays the given price on the screen.
      */
     private void displayPrice(int number) {
-        TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
+        TextView priceTextView = findViewById(R.id.price_text_view);
         priceTextView.setText(NumberFormat.getCurrencyInstance().format(number));
     }
 
@@ -165,9 +184,11 @@ public class MainActivity extends AppCompatActivity {
      * This method displays the given text on the screen.
      */
     private void displayMessage(String message) {
-        TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
+        TextView priceTextView = findViewById(R.id.price_text_view);
         priceTextView.setText(message);
 
     }
 
+    public void nowHiring(View view) {
+    }
 }
