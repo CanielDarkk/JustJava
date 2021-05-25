@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
      *Declare Global Variables Here
      */
     int quantity = 0;
+    private String packagecontent;
 
 
     @Override
@@ -55,6 +56,13 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    }
+
+
+
+    public void nowHiring(View view) {
+        Intent i = new Intent(packagecontent:this,NowHiring.class);
+        startActivity(i);
     }
 
 
@@ -187,8 +195,4 @@ public class MainActivity extends AppCompatActivity {
         TextView priceTextView = findViewById(R.id.price_text_view);
         priceTextView.setText(message);
 
-    }
-
-    public void nowHiring(View view) {
-    }
-}
+    }}

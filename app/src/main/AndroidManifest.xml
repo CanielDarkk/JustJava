@@ -18,7 +18,7 @@
         </activity>
 
 
-    <activity android:name=".SelectRegionCoffee"
+    <activity android:name=".coffeeAccessoriesPage"
         android:label="Coffee Accessories">
 
     </activity>
